@@ -12,7 +12,7 @@ export class Articles extends Component {
        axios.get('https://frt-backend.local/wp-json/wp/v2/articles?_embed')
            .then(res => this.setState({
                articles: res.data,
-               isLoaded: true
+               isLoaded: true // Set isLoaded to false to develop the loading page. 
            }))
            .catch(err => console.log(err));
    }
@@ -26,7 +26,8 @@ export class Articles extends Component {
                    <div key={article.id}>
                        <h2>{article.title.rendered}</h2>
                        <Interweave content={article.excerpt.rendered} />
-                       <p>Publisher: {article.acf.publisher}</p> //acf is a custom field plugin that we use inside wordpress
+                       {/* ACF is the Custom field plugin being used in Wordpress */}
+                       <p>Publisher: {article.acf.publisher}</p> 
                        <p>Author: {
                            article._embedded.author && article._embedded.author[0].name
                        }</p>
@@ -35,11 +36,15 @@ export class Articles extends Component {
                            ? article._embedded['wp:term'][0].map(category => category.name).join(', ')
                            : 'No categories'
                        }</p>
-                       <div className=''>
+                       <div className='bg-black'>
+                        {/* We are using Interweave here to convert an HTML image to a react friendly image, as the content contains the para text + and images they added to the site. */}
                            <Interweave content={article.content.rendered} />
                        </div>
                    </div>
-               )) : <p>Loading...</p>}
+               )) : <div><p>Create a Loading Page comp and add it here ...</p>
+                     <p>loading ...</p>
+               </div>
+               }
            </div>
        );
    }

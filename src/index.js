@@ -9,6 +9,8 @@ import "./index.css";
 import Homapage from "./pages/homepage";
 import ArticleItem from "./components/ArticleItem";
 import Layout from "./components/Layout";  // Make sure to import the Layout component
+import { Articles } from "./components/Articles";
+
 
 const router = createBrowserRouter([
   {
@@ -18,8 +20,8 @@ const router = createBrowserRouter([
       { path: "",
        element: <Homapage /> },  // Default route when visiting '/'
       {
-        path: "about",
-        element: <ArticleItem />,
+        path: "articles",
+        element: <Articles />,
       }
     ],
   },
