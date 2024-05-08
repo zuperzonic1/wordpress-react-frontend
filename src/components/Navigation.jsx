@@ -15,9 +15,7 @@ export default function Navigation() {
     <nav className="bg-white border border-gray-200 dark:border-gray-700 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 shadow">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <Link to="/" className="flex items-center">
-          <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-            LOGO
-          </span>
+          <img src="/logo.png" alt="Logo" className="h-8 sm:h-10" /> {/* Adjust image size as needed */}
         </Link>
 
         <div className="flex items-center">
