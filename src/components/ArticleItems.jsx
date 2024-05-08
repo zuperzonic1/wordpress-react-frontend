@@ -15,7 +15,13 @@ function ArticleItems({ isLoaded, articles }) {
         <div className="flex flex-col gap-4 p-4">
             {articles.map(article => (
                 <Card key={article.id} className="mb-5">
+                    {/* Display featured image if it exists */}
+                    {article._embedded && article._embedded['wp:featuredmedia'] && article._embedded['wp:featuredmedia'][0].source_url && (
+                        <img src={article._embedded['wp:featuredmedia'][0].source_url} alt={article.title.rendered} className="mb-4" />
+                    )}
                     <h2 className="text-2xl font-bold">{article.title.rendered}</h2>
+                    <p className="font-medium">Published on: {new Date(article.date).toLocaleDateString()}</p>
+                    <p className="font-medium">Last Modified: {new Date(article.modified).toLocaleDateString()}</p>
                     <Interweave content={article.excerpt.rendered} />
                     <p className="font-medium">Publisher: {article.acf.publisher}</p>
                     <p className="font-medium">Author: {
@@ -34,5 +40,4 @@ function ArticleItems({ isLoaded, articles }) {
         </div>
     );
 }
-
 export default ArticleItems;
