@@ -1,10 +1,12 @@
-import ArticleItem from "../components/ArticleItems";
+import ArticleItems from "../components/ArticleItems";
 
-function Articles() {
+function Articles({ isLoaded, articles }) {
+    console.log('Articles');
+    console.log(articles);
     return (
         <div>
             <h1 className="text-3xl font-bold text-center">Articles</h1>
-            <ArticleItem />
+            <ArticleItems isLoaded={isLoaded} articles={articles}  />
             </div>
 );
 }

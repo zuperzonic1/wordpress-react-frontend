@@ -1,21 +1,8 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+
 import { Interweave } from 'interweave';
 import { Card, Spinner } from 'flowbite-react';
 
-function ArticleItem() {
-    const [articles, setArticles] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        axios.get('https://frt-backend.local/wp-json/wp/v2/articles?_embed')
-            .then(res => {
-                setArticles(res.data);
-                setIsLoaded(true);
-            })
-            .catch(err => console.log(err));
-    }, []); // The empty array ensures this effect only runs once, similar to componentDidMount
-
+function ArticleItems({ isLoaded, articles }) {
     if (!isLoaded) {
         return (
             <div className="flex justify-center items-center h-screen">
@@ -48,4 +35,4 @@ function ArticleItem() {
     );
 }
 
-export default ArticleItem;
+export default ArticleItems;
