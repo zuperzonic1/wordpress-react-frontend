@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // This is a navbar that i took from the link below and modfied it to work with react/react-router.
 // https://tailwindcomponents.com/component/navbar-header
@@ -15,7 +15,8 @@ export default function Navigation() {
     <nav className="bg-white border border-gray-200  px-2 sm:px-4 py-2.5 rounded shadow">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <Link to="/" className="flex items-center">
-          <img src="/logo.png" alt="Logo" className="h-8 sm:h-10" /> {/* Adjust image size as needed */}
+          <img src="/logo.png" alt="Logo" className="h-8 sm:h-10" />{" "}
+          {/* Adjust image size as needed */}
         </Link>
 
         <div className="flex items-center">
@@ -26,7 +27,12 @@ export default function Navigation() {
             onClick={toggleMenu}
           >
             <span className="sr-only">Open main menu</span>
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -37,7 +43,9 @@ export default function Navigation() {
           </button>
         </div>
 
-        <div className={`${isMenuOpen ? '' : 'hidden'} w-full md:block md:w-auto`}>
+        <div
+          className={`${isMenuOpen ? "" : "hidden"} w-full md:block md:w-auto`}
+        >
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
             <li>
               <Link

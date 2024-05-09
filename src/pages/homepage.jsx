@@ -1,5 +1,5 @@
-import '../App.css';
-import HomepageTemplate from '../components/HomepageTemplate';
+import "../App.css";
+import HomepageTemplate from "../components/HomepageTemplate";
 
 function Homepage() {
   return (

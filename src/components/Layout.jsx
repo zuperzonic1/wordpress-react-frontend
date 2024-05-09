@@ -6,9 +6,9 @@ import Footer from "./Footer";
 const Layout = () => {
   return (
     <div>
-        <Navigation />
-            <Outlet />  {/* Nested routes will render here */}
-        <Footer />
+      <Navigation />
+      <Outlet /> {/* Nested routes will render here */}
+      <Footer />
     </div>
   );
 };
