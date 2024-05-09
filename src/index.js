@@ -13,7 +13,7 @@ function App() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        axios.get('https://frt-backend.local/wp-json/wp/v2/articles?_embed')
+        axios.get('https://backend.frt-information-hub.ca/wp/wp-json/wp/v2/articles?_embed')
             .then(res => {
                 setArticles(res.data);
                 setIsLoaded(true);
