@@ -2,6 +2,7 @@ import { Interweave } from 'interweave'; // this allows us to render HTML conten
 
 function ArticleItems({ isLoaded, articles }) {
     if (!isLoaded) {
+        // Dont laugh at my spinner, This i just a template  :)
         return (
             <div className="flex justify-center items-center h-screen">
                 <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
@@ -14,16 +15,14 @@ function ArticleItems({ isLoaded, articles }) {
     console.log(articles);
 
     return (
-        <div className="mx-auto p-4">
+        <div className="">
             {articles.map(article => (
-                <div key={article.id} className="mb-5 p-4 bg-white border border-gray-200 rounded-lg shadow-lg">
+                <div key={article.id} className="mb-5 p-4 bg-white border border-gray-200 rounded-lg">
                     {/* Display featured image if it exists */}
                     {article._embedded && article._embedded['wp:featuredmedia'] && article._embedded['wp:featuredmedia'][0].source_url && (
                         <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg mb-4 w-1/2 mx-auto">
                             <img src={article._embedded['wp:featuredmedia'][0].source_url} alt={(article.title.rendered || 'Article Image')} className="object-cover w-full h-full" />
                         </div>
-                    
-                   
                     )}
                     <h2 className="text-2xl font-bold mb-2">{article.title.rendered}</h2>
                     <p className="text-sm text-gray-800 mb-1"><strong>Published on:</strong> {new Date(article.date).toLocaleDateString()}</p>
