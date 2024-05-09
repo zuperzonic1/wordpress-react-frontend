@@ -2,7 +2,7 @@ import '../App.css';
 
 function Homepage() {
   return (
-    <main className="p-4">
+    <main className="p-4 mx-auto max-w-7xl">
       <div className="bg-white shadow mb-4 py-4 px-8">
         <h1 className="text-3xl font-bold">Homepage</h1>
       </div>
