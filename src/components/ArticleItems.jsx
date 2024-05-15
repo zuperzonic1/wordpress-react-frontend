@@ -1,4 +1,4 @@
-import { Interweave } from "interweave"; // this allows us to render HTML content from the the WordPress API
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 function ArticleItems({ isLoaded, articles }) {
   if (!isLoaded) {
@@ -39,43 +39,12 @@ function ArticleItems({ isLoaded, articles }) {
           <p className="text-sm text-gray-800 mb-3">
             <strong>Last Modified:</strong> {article.modified}
           </p>
-          <Interweave
-            content={article.excerpt}
-            className="text-gray-700 mb-3"
-          />
-          <p className="text-sm text-gray-800">
-            <strong>Author:</strong> {article.author}
-          </p>
-          <p className="text-sm text-gray-800">
-            <strong>URL:</strong>{" "}
-            <a
-              href={article.articleUrl}
-              className="text-blue-500 hover:text-blue-700"
-            >
-              Visit Article
-            </a>
-          </p>
-          <p className="text-sm text-gray-800">
-            <strong>Published Date:</strong> {article.publishedDate}
-          </p>
-          <p className="text-sm text-gray-800">
-            <strong>Publisher:</strong> {article.publisher}
-          </p>
-          <p className="text-sm text-gray-800">
-            <strong>Categories:</strong> {article.categories}
-          </p>
-          <p className="text-sm text-gray-800">
-            <strong>Tags:</strong> {article.tags}
-          </p>
-          <div className="prose max-w-none">
-            <Interweave content={article.content} />
-          </div>
-          <a
-            href={article.articleUrl}
-            className="mt-4 inline-block text-blue-500 hover:text-blue-700"
+          <Link
+            to={`/articles/${article.id}`}
+            className="text-blue-500 hover:text-blue-700"
           >
             Read full article
-          </a>
+          </Link>
         </div>
       ))}
     </div>

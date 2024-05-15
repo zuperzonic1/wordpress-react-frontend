@@ -6,6 +6,8 @@ import axios from "axios";
 import "./index.css";
 import Homepage from "./pages/Homepage";
 import Articles from "./pages/Articles";
+import ArticleItems from "./components/ArticleItems";
+import ArticleTemplatePage from "./pages/ArticleTemplatePage";
 import Layout from "./components/Layout";
 
 function App() {
@@ -46,7 +48,12 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, []);
+  console.log(articles);
 
+  // Passing the data to the ArticleItems component
+  // <ArticleItems isLoaded={isLoaded} articles={articles} />;
+
+  // Router configuration
   const router = createBrowserRouter([
     {
       path: "/",
@@ -56,6 +63,16 @@ function App() {
         {
           path: "articles",
           element: <Articles isLoaded={isLoaded} articles={articles} />,
+          children: [
+            {
+              path: ":articleId",
+              element: <ArticleTemplatePage articles={articles} />,
+            },
+            {
+              path: "",
+              element: <ArticleItems isLoaded={isLoaded} articles={articles} />,
+            },
+          ],
         },
       ],
     },
