@@ -6,7 +6,7 @@ import axios from "axios";
 import "./index.css";
 import Homepage from "./pages/Homepage";
 import Articles from "./pages/Articles";
-import ArticleItems from "./components/ArticleItems";
+import ArticleCards from "./components/ArticleCards";
 import ArticleTemplatePage from "./pages/ArticleTemplatePage";
 import Layout from "./components/Layout";
 
@@ -50,9 +50,6 @@ function App() {
   }, []);
   console.log(articles);
 
-  // Passing the data to the ArticleItems component
-  // <ArticleItems isLoaded={isLoaded} articles={articles} />;
-
   // Router configuration
   const router = createBrowserRouter([
     {
@@ -70,7 +67,7 @@ function App() {
             },
             {
               path: "",
-              element: <ArticleItems isLoaded={isLoaded} articles={articles} />,
+              element: <ArticleCards isLoaded={isLoaded} articles={articles} />,
             },
           ],
         },
