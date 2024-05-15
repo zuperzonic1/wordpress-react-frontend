@@ -6,45 +6,64 @@ import axios from "axios";
 import "./index.css";
 import Homepage from "./pages/Homepage";
 import Articles from "./pages/Articles";
-import Layout from "./components/Layout"; // Make sure to import the Layout component
+import Layout from "./components/Layout";
 
 function App() {
   const [articles, setArticles] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    //  Fetch articles from the WordPress REST API + renaming the properties
     axios
       .get(
         "https://backend.frt-information-hub.ca/wp/wp-json/wp/v2/articles?_embed"
       )
       .then((res) => {
-        setArticles(res.data);
+        const simplifiedArticles = res.data.map((article) => ({
+          id: article.id,
+          imageUrl:
+            article._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "",
+          title: article.title.rendered,
+          date: new Date(article.date).toLocaleDateString(),
+          modified: new Date(article.modified).toLocaleDateString(),
+          excerpt: article.excerpt.rendered,
+          author: article._embedded?.author?.[0]?.name || "Unknown",
+          articleUrl: article.acf.article_url,
+          publishedDate: article.acf.published_date,
+          publisher: article.acf.publisher,
+          categories:
+            article._embedded["wp:term"]?.[0]
+              ?.map((cat) => cat.name)
+              .join(", ") || "",
+          tags:
+            article._embedded["wp:term"]?.[1]
+              ?.map((tag) => tag.name)
+              .join(", ") || "",
+          content: article.content.rendered,
+        }));
+        setArticles(simplifiedArticles);
         setIsLoaded(true);
       })
       .catch((err) => console.log(err));
-  }, []); // The empty array ensures this effect only runs once, similar to componentDidMount
+  }, []);
 
-  // Define the router inside the App component
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,
       children: [
-        { path: "", element: <Homepage /> }, // Default route when visiting '/'
+        { path: "", element: <Homepage /> },
         {
           path: "articles",
           element: <Articles isLoaded={isLoaded} articles={articles} />,
         },
       ],
     },
-    // Additional routes can be added here
   ]);
 
-  // Return the RouterProvider with the router configuration
   return <RouterProvider router={router} />;
 }
 
-// Create a root container and render the App component
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

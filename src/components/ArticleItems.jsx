@@ -2,7 +2,6 @@ import { Interweave } from "interweave"; // this allows us to render HTML conten
 
 function ArticleItems({ isLoaded, articles }) {
   if (!isLoaded) {
-    // Dont laugh at my spinner, This i just a template  :)
     return (
       <div className="flex justify-center items-center h-screen">
         <div
@@ -14,77 +13,63 @@ function ArticleItems({ isLoaded, articles }) {
       </div>
     );
   }
-  console.log("ArticleItems");
-  console.log(articles);
 
   return (
-    <div className="">
+    <div>
       {articles.map((article) => (
         <div
           key={article.id}
           className="mb-5 p-4 bg-white border border-gray-200 rounded-lg"
         >
-          {/* Display featured image if it exists */}
-          {article._embedded &&
-            article._embedded["wp:featuredmedia"] &&
-            article._embedded["wp:featuredmedia"][0].source_url && (
-              <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg mb-4 w-1/2 mx-auto">
-                <img
-                  src={article._embedded["wp:featuredmedia"][0].source_url}
-                  alt={article.title.rendered || "Article Image"}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            )}
-          <h2 className="text-2xl font-bold mb-2">{article.title.rendered}</h2>
+          {article.imageUrl && (
+            <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg mb-4 w-1/2 mx-auto">
+              <img
+                src={article.imageUrl}
+                alt={article.title}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          )}
+          <h2 className="text-2xl font-bold mb-2">{article.title}</h2>
           <p className="text-sm text-gray-800 mb-1">
-            <strong>Published on:</strong>{" "}
-            {new Date(article.date).toLocaleDateString()}
+            <strong>Published on:</strong> {article.date}
           </p>
           <p className="text-sm text-gray-800 mb-3">
-            <strong>Last Modified:</strong>{" "}
-            {new Date(article.modified).toLocaleDateString()}
+            <strong>Last Modified:</strong> {article.modified}
           </p>
           <Interweave
-            content={article.excerpt.rendered}
+            content={article.excerpt}
             className="text-gray-700 mb-3"
           />
           <p className="text-sm text-gray-800">
-            <strong>Author:</strong> {article.acf.article_author}
+            <strong>Author:</strong> {article.author}
           </p>
           <p className="text-sm text-gray-800">
             <strong>URL:</strong>{" "}
             <a
-              href={article.acf.article_url}
+              href={article.articleUrl}
               className="text-blue-500 hover:text-blue-700"
             >
               Visit Article
             </a>
           </p>
           <p className="text-sm text-gray-800">
-            <strong>Published Date:</strong> {article.acf.published_date}
+            <strong>Published Date:</strong> {article.publishedDate}
           </p>
           <p className="text-sm text-gray-800">
-            <strong>Publisher:</strong> {article.acf.publisher}
+            <strong>Publisher:</strong> {article.publisher}
           </p>
           <p className="text-sm text-gray-800">
-            <strong>Author:</strong> {article._embedded.author[0].name}
+            <strong>Categories:</strong> {article.categories}
           </p>
           <p className="text-sm text-gray-800">
-            <strong>Categories:</strong>{" "}
-            {article._embedded["wp:term"][0]
-              .map((category) => category.name)
-              .join(", ")}
-          </p>
-          <p className="text-sm text-gray-800">
-            <strong>Tags:</strong>{" "}
-            {article._embedded["wp:term"][1].map((tag) => tag.name).join(", ")}
+            <strong>Tags:</strong> {article.tags}
           </p>
           <div className="prose max-w-none">
-            <Interweave content={article.content.rendered} />
+            <Interweave content={article.content} />
           </div>
           <a
-            href={article.acf.article_url}
+            href={article.articleUrl}
             className="mt-4 inline-block text-blue-500 hover:text-blue-700"
           >
             Read full article
