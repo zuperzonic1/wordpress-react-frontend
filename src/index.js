@@ -5,9 +5,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from "axios";
 import "./index.css";
 import Homepage from "./pages/Homepage";
+import FAQPage from "./pages/FAQPage";
+import MapPage from "./pages/MapPage";
 import Articles from "./pages/Articles";
 import ArticleCards from "./components/ArticleCards";
-import ArticleTemplatePage from "./pages/ArticleTemplatePage";
+import ArticleDetailsPage from "./pages/ArticleDetailsPage";
 import Layout from "./components/Layout";
 
 function App() {
@@ -57,13 +59,15 @@ function App() {
       element: <Layout />,
       children: [
         { path: "", element: <Homepage /> },
+        { path: "faq", element: <FAQPage /> },
+        { path: "info-map", element: <MapPage /> },
         {
           path: "articles",
           element: <Articles isLoaded={isLoaded} articles={articles} />,
           children: [
             {
               path: ":articleId",
-              element: <ArticleTemplatePage articles={articles} />,
+              element: <ArticleDetailsPage articles={articles} />,
             },
             {
               path: "",

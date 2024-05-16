@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Interweave } from "interweave";
 
-function ArticleTemplatePage({ articles }) {
+function ArticleDetailsPage({ articles }) {
   const { articleId } = useParams();
   const article = articles.find((a) => `${a.id}` === articleId);
 
@@ -63,4 +63,4 @@ function ArticleTemplatePage({ articles }) {
   );
 }
 
-export default ArticleTemplatePage;
+export default ArticleDetailsPage;
