@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 // import ArticleItems from "../components/ArticleItems";
 
-function Articles({ isLoaded, articles }) {
+function Articles({ articles }) {
   return (
     <main className="p-4 mx-auto max-w-7xl">
       <div className="bg-white shadow mb-4 py-4 px-8 rounded-lg">
