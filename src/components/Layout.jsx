@@ -7,7 +7,9 @@ const Layout = () => {
   return (
     <div>
       <Navigation /> {/* Navigation component */}
-      <Outlet /> {/* Nested routes inside your index.jsx will render here */}
+      <div className="min-h-75vh">
+        <Outlet /> {/* Nested routes inside your index.jsx will render here */}
+      </div>
       <Footer /> {/* Footer component */}
     </div>
   );
