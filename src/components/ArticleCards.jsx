@@ -2,25 +2,22 @@ import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import { Interweave } from "interweave";
 
 // This is a component that will render the articles in a card format.
-// Edit them both as needed.
 function ArticleCards({ articles }) {
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {articles.map((article) => (
         <div
           key={article.id}
-          className="mb-5 p-4 bg-white border border-gray-200 rounded-lg flex"
+          className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg"
         >
           {article.imageUrl && (
-            <div className="flex-none w-48 mr-4">
-              <img
-                src={article.imageUrl}
-                alt={article.title}
-                className="h-full w-full object-cover rounded-lg"
-              />
-            </div>
+            <img
+              src={article.imageUrl}
+              alt={article.title}
+              className="h-48 w-full object-cover"
+            />
           )}
-          <div className="flex-grow">
+          <div className="p-4">
             <h2 className="text-2xl font-bold mb-2">{article.title}</h2>
             <p className="text-sm text-gray-800 mb-1">
               <strong>Published on:</strong> {article.publishedDate}
