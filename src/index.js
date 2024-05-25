@@ -9,11 +9,9 @@ import Layout from "./components/Layout";
 const Homepage = React.lazy(() => import("./pages/Homepage"));
 const FAQPage = React.lazy(() => import("./pages/FAQPage"));
 const MapPage = React.lazy(() => import("./pages/MapPage"));
-const Articles = React.lazy(() => import("./pages/Articles"));
-const ArticleCards = React.lazy(() => import("./components/ArticleCards"));
-const ArticleDetailsPage = React.lazy(() =>
-  import("./pages/ArticleDetailsPage")
-);
+// const Articles = React.lazy(() => import("./pages/Articles"));
+const ArticleCards = React.lazy(() => import("./pages/ArticleCards"));
+const ArticleDetails = React.lazy(() => import("./pages/ArticleDetails"));
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -81,6 +79,7 @@ function App() {
         {
           path: "",
           element: (
+            // Lazy load the homepage component
             <React.Suspense fallback={loadingIndicator}>
               <Homepage />
             </React.Suspense>
@@ -106,33 +105,21 @@ function App() {
           path: "articles",
           element: isDataLoaded ? (
             <React.Suspense fallback={loadingIndicator}>
-              <Articles articles={articles} />
+              <ArticleCards articles={articles} />
             </React.Suspense>
           ) : (
             loadingIndicator
           ),
-          children: [
-            {
-              path: ":articleId",
-              element: isDataLoaded ? (
-                <React.Suspense fallback={loadingIndicator}>
-                  <ArticleDetailsPage articles={articles} />
-                </React.Suspense>
-              ) : (
-                loadingIndicator
-              ),
-            },
-            {
-              path: "",
-              element: isDataLoaded ? (
-                <React.Suspense fallback={loadingIndicator}>
-                  <ArticleCards articles={articles} />
-                </React.Suspense>
-              ) : (
-                loadingIndicator
-              ),
-            },
-          ],
+        },
+        {
+          path: "articles/:articleId",
+          element: isDataLoaded ? (
+            <React.Suspense fallback={loadingIndicator}>
+              <ArticleDetails articles={articles} />
+            </React.Suspense>
+          ) : (
+            loadingIndicator
+          ),
         },
       ],
     },
